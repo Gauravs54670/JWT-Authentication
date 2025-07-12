@@ -10,3 +10,12 @@
 
 5-> Finally, Spring Security applies any authorization rules defined in the SecurityFilterChain. If the user has the required roles or permissions, the request proceeds to the controller. Otherwise, Spring returns a 403 Forbidden or 401 Unauthorized error, depending on the situation.
 
+### 🔐 JWT Authentication Flow
+
+1. **Login** → User sends username & password to `/api/public/auth`.
+2. **Authentication** → Spring authenticates using `AuthenticationManager` & `UserDetailsService`.
+3. **Token Generation** → JWT is created using `JwtUtils` and returned to the client.
+4. **Request with Token** → Client sends JWT in the `Authorization` header.
+5. **Token Validation** → `JwtAuthenticationFilter` validates the token.
+6. **Set Security Context** → Authenticated user is set in `SecurityContextHolder`.
+7. **Authorization Check** → Roles are checked, controller is accessed.
